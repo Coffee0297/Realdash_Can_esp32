@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RealDashCAN version="2">
+  <frames>
+    <frame id="0x100" dlc="3">  <!-- DLC=3 (uses bytes 8,9,10) -->
+      <value name="Fuel Level" offset="0" length="1" units="%" endian="little" />
+      <value name="Spare Inputs" offset="1" length="1" type="bitmask" />
+    </frame>
+  </frames>
+</RealDashCAN>
