@@ -1,39 +1,34 @@
-# ESP32 RealDash CAN Bluetooth Adapter
+# ESP32 RealDash CAN Bluetooth Adapter (AZ-Delivery DevKit V4)
 
-![Project Banner](https://img.shields.io/badge/Platform-ESP32-blue) ![License](https://img.shields.io/badge/License-MIT-green)
+![Project Banner](https://img.shields.io/badge/Platform-ESP32-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![PlatformIO](https://img.shields.io/badge/PlatformIO-Compatible-brightgreen)
 
-An ESP32-based project that reads fuel level and digital inputs, packages the data into CAN frames, and transmits them over Bluetooth to the [RealDash](https://realdash.net) automotive dashboard app.
+An ESP32-based project for the **AZ-Delivery DevKit V4** that reads fuel level and digital inputs, packages data into CAN frames, and transmits them via Bluetooth to the [RealDash](https://realdash.net) automotive dashboard app. Optimized for PlatformIO in Visual Studio Code.
 
 ## Features
-- **Fuel Level Monitoring**: Reads a 0-3.3V analog fuel sensor (e.g., potentiometer) and converts it to a 0-100% value.
-- **Digital Inputs**: Monitors up to 6 digital inputs (e.g., switches, sensors) as a bitmask.
-- **Bluetooth CAN Emulation**: Transmits data to RealDash using the [RealDash CAN protocol](https://github.com/janimm/RealDash-extras/blob/master/RealDash-CAN/realdash-can-protocol.md) over Bluetooth.
-- **Debugging Support**: Serial monitor integration for troubleshooting.
+- **AZ-Delivery DevKit V4 Optimized**: Preconfigured for ESP32-WROOM-32 module
+- **Fuel Level Monitoring**: 0-100% via analog sensor (12-bit ADC)
+- **Digital Input Monitoring**: 6-channel input with pull-up resistors
+- **Bluetooth CAN Emulation**: RealDash-compatible protocol over BLE Serial
+- **Structured Logging**: Serial debug output at 115200 baud
 
 ## Hardware Requirements
-- **ESP32 Development Board** (e.g., ESP32 DevKit, NodeMCU-32S)
-- **Fuel Sensor**: Analog voltage output (0.5V-3.0V range recommended)
-- **Digital Inputs**: Up to 6 switches/sensors (connected to GPIOs with pull-up resistors)
-- **Bluetooth 4.0+ Device**: Smartphone/tablet running RealDash
-
-### Pin Configuration (From `config.h`)
-| Component         | GPIO Pin |
-|--------------------|----------|
-| Fuel Sensor (ADC)  | 34       |
-| Spare Input 1      | 32       |
-| Spare Input 2      | 33       |
-| Spare Input 3      | 25       |
-| Spare Input 4      | 26       |
-| Spare Input 5      | 27       |
-| Spare Input 6      | 14       |
+| Component               | Specification                   |
+|-------------------------|---------------------------------|
+| ESP32 Board             | AZ-Delivery DevKit V4           |
+| Fuel Sensor Input       | 0.5V-3.0V analog (GPIO34)      |
+| Digital Inputs          | 6x GPIOs (32, 33, 25, 26, 27, 14) |
+| Bluetooth 4.0+ Device   | Android/iOS running RealDash   |
 
 ---
 
-## Installation
-1. **Arduino IDE Setup**:
-   - Install [ESP32 Arduino Core](https://github.com/espressif/arduino-esp32).
-   - Install `BluetoothSerial` library (included with ESP32 core).
+## PlatformIO Configuration (`platformio.ini`)
+```ini
+[env:az-delivery-devkit-v4]
+platform = espressif32
+board = az-delivery-devkit-v4
+monitor_speed = 115200
+framework = arduino
 
-2. **Clone Repository**:
-   ```bash
-   git clone https://github.com/yourusername/esp32-realdash-fuel-monitor.git
+[platformio]
+src_dir = src
+include_dir = include
